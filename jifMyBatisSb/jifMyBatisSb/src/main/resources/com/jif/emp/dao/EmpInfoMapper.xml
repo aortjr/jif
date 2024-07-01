@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jif.emp.dao.EmpInfoMapper">
+    <!--  -->
+   <select id="findAll" resultType="com.jif.emp.entity.EmpInfo">
+      SELECT * FROM employee WHERE "effectFlag" = 0
+   </select>
+
+   <!-- 条件指定検索 -->
+   <select id="search" resultType="com.jif.emp.entity.EmpInfo">
+      SELECT * FROM employee
+      WHERE 1 = 1
+      <if test="employeeID != null and employeeID != ''">
+         AND "employeeID" = #{employeeID}
+      </if>
+      <if test="nameKanji1 != null and nameKanji1 != ''">
+         AND "nameKanji1" LIKE CONCAT('%', #{nameKanji1}, '%')
+      </if>
+      <if test="nameKanji2 != null and nameKanji2 != ''">
+         AND "nameKanji2" LIKE CONCAT('%', #{nameKanji2}, '%')
+      </if>
+   </select>
+
+   <!-- 主キー検索 -->
+   <select id="findByKey" resultType="com.jif.emp.entity.EmpInfo">
+      SELECT * FROM employee WHERE "employeeID" = #{employeeID}
+   </select>
+
+   <!-- 新規登録 -->
+   <insert id="save">
+      INSERT INTO employee
+      ("employeeID", "nameKanji1", "nameKanji2", "nameKana1", "nameKana2",
+      "nameEng1", "nameEng2", birthday, sex, "employeeFlag", "enterDay",
+      "postNo1", "postNo2", address1, address2, "telNo1", "telNo2",
+      mail1, mail2, "effectFlag", register, "registDateTime", modifyer,
+      "modifyDateTime")
+      VALUES
+      (#{employeeID}, #{nameKanji1}, #{nameKanji2}, #{nameKana1}, #{nameKana2},
+      #{nameEng1}, #{nameEng2}, TO_DATE(#{birthday}, 'YYYYMMDD'), #{sex},
+      #{employeeFlag}, TO_DATE(#{enterDay}, 'YYYYMMDD'), #{postNo1},
+      #{postNo2},
+      #{address1}, #{address2}, #{telNo1}, #{telNo2}, #{mail1}, #{mail2},
+      0, 'R999999999', current_timestamp, 'R888888888', current_timestamp)
+   </insert>
+
+   <!-- 更新 -->
+   <update id="update">
+      UPDATE employee SET "nameKanji1" = #{nameKanji1}, "nameKanji2" = #{nameKanji2}, 
+      "nameKana1" = #{nameKana1}, "nameEng1" = #{nameEng1}, "nameEng2" = #{nameEng2}, 
+      "employeeFlag" = #{employeeFlag}, "leaveDay" = TO_DATE(#{leaveDay}, 'YYYYMMDD'), "postNo1" = #{postNo1}, 
+      "postNo2" = #{postNo2}, address1 = #{address1}, address2 = #{address2}, 
+      "telNo1" = #{telNo1}, "telNo2" = #{telNo2}, mail1 = #{mail1}, mail2 = #{mail2}, 
+      "effectFlag" = 0, modifyer = 'R888888888', "modifyDateTime" = current_timestamp
+      WHERE "employeeID" = #{employeeID}
+   </update>
+   
+   <!--  -->
+   <update id="delete">
+       UPDATE employee SET "effectFlag" = 1, modifyer = 'R888888888', "modifyDateTime" = current_timestamp
+       WHERE "employeeID" = #{employeeID}
+   </update>
+
+</mapper>

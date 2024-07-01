@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+<head th:replace="common/head :: head_fragment(title = 'コードマスタ更新', scripts = ~{::script}, links = ~{::link})"></head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="/css/bootstrap.min.css" />
+<script src="/js/bootstrap.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+
+<body>
+	<div class="panel panel-primary" layout:fragment="content">
+		<div class="panel-heading">コードマスタ更新</div>
+		<div class="panel-body">
+			<form class="form-horizontal"
+				th:action="@{/codeList/{codeKind}/{code}/update(codeKind=*{codeKind}, code=*{code})}"
+				th:method="post" th:object="${codeBean}">
+				<div class="form-group">
+					<label class="col-md-3 control-label">コード名称</label>
+					<div class="col-md-9">
+						<input class="form-control" type="text" th:field="*{codeName}" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-3 control-label">表示順</label>
+					<div class="col-md-9">
+						<input class="form-control" type="text" th:field="*{displayRank}" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-md-offset-3 col-md-9">
+						<button class="btn btn-primary">Update</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

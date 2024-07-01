@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jif.code.dao.CodeMapper">
+   <select id="findAll" resultType="com.jif.code.entity.CodeBean">
+      select *  
+        from "codeMaster" 
+       where "codeKind" != '0'
+         and "effectFlag" = 0  
+       order by "codeKind", code
+   </select>
+   <select id="findByCodeKind" resultType="com.jif.code.entity.CodeBean">
+      select *  
+        from "codeMaster" 
+       where "codeKind" = #{codeKind}  
+       order by code
+   </select>
+   <select id="findOne" resultType="com.jif.code.entity.CodeBean">
+      select * from "codeMaster" where "codeKind" = #{codeKind} and code = #{code}
+   </select>
+   <select id="findCodeMax" resultType="String">
+     select max(code) 
+     from public."codeMaster" 
+     where "codeKind" = '0';
+     
+   </select>
+   
+   <insert id="insert" >
+     insert into "codeMaster" ("codeKind", code, "codeName", "displayRank", "effectFlag", register, "registDateTime", modifyer, "modifyDateTime") 
+            values (#{codeKind}, #{code}, #{codeName}, #{displayRank}, 0, 'R999999999', current_timestamp, 'R888888888', current_timestamp)
+   </insert>
+   
+	   <update id="update">
+	     update "codeMaster" set "codeName" = #{codeName}, "displayRank" = #{displayRank},  
+                            modifyer = 'R888888888', "modifyDateTime" = current_timestamp 
+            where "codeKind" = #{codeKind} and code = #{code}
+   </update>
+   
+   <delete id="delete">
+     <!-- delete from "codeMaster" where "codeKind" = #{codeKind} and code = #{code} -->
+     update "codeMaster" set "effectFlag" = 1  where "codeKind" = #{codeKind} and code = #{code}
+   </delete>
+</mapper>

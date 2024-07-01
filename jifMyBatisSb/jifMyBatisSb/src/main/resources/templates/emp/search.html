@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common/head :: head_fragment(title = '社員情報一覧', scripts = ~{::script}, links = ~{::link})">
+</head>
+<body class="col-lg-3 col-lg-offset-1">
+	<div class="container">
+		<h1>社員情報一覧</h1>
+		<div class="float-end">
+			<a th:href="@{/emp/add}" class="btn btn-danger p-2 text-white bg-opacity-50">新規登録</a>
+		</div>
+		<form th:action="@{/emp/search}" th:object="${empSearchRequest}" th:method="post">
+
+			<div class="form-group">
+
+			    	<label for="employeeID"></label> <input type="text"
+					class="w-25 form-control" style="background-color: #FFE4E1;" th:field="*{employeeID}" placeholder="社員ID"> 
+					<label for="nameKanji1" ></label> <input type="text"
+					class="w-25 form-control" style="background-color: #FFE4E1;" th:field="*{nameKanji1}" placeholder="名前（姓)"> 
+					<label for="nameKanji2"></label> <input type="text"
+					class="w-25 form-control" style="background-color: #FFE4E1;" th:field="*{nameKanji2}" placeholder="名前（名）">
+			
+			</div>
+			<br />
+			<button type="submit" class="btn btn-danger p-2 text-white bg-opacity-50">検索</button>
+		</form>
+		<div th:if="${emplist}">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>社員ID</th>
+						<th>名前</th>
+						<th>名前(カナ)</th>
+						<th>名前(英語)</th>
+					　　　 <th>社員区分</th>
+					    <th>郵便番号</th>
+						<th>住所</th>
+						<th>電話番号</th>
+						<th>メールアドレス</th>
+						<th>登録日時</th>
+						<th>更新日時</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="empInfo : ${emplist}" th:object="${empInfo}" class="align-middle">
+						<td th:text="*{employeeID}"></td>
+						<td th:text="*{nameKanji1} + ' ' + *{nameKanji2}"></td>
+						<td th:text="*{nameKana1} + ' ' + *{nameKana2}"></td>
+						<td th:text="*{nameEng1} + ' ' + *{nameEng2}"></td>
+						<td th:text="*{employeeFlag}"></td>
+						<td th:text="*{postNo1} + ' ' + *{postNo2}"></td>
+						<td th:text="*{address1} + ' ' + *{address2}"></td>
+						<td th:text="*{telNo1}"></td>
+						<td th:text="*{mail1}"></td>
+						<td th:text="*{registDateTime}"></td>						
+						<td th:text="*{modifyDateTime}"></td>
+						<td>
+						    <a th:href="@{/emp/{employeeID}/edit(employeeID=*{employeeID})}"
+							class="btn btn-danger p-2 text-white bg-opacity-50">編集</a> 
+							
+							<a th:href="@{/emp/{employeeID}/delete(employeeID=*{employeeID})}"
+							class="btn btn-danger p-2 text-white bg-opacity-50">削除</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</body>
+</html>

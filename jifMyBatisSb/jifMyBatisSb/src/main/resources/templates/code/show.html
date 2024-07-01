@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout">
+<head th:replace="common/head :: head_fragment(title = 'コードマスタ照会', scripts = ~{::script}, links = ~{::link})"></head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="/css/bootstrap.min.css" />
+<script src="/js/bootstrap.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+
+<body>
+	<div class="panel panel-primary" layout:fragment="content">
+		<div class="panel-heading">コードマスタ照会</div>
+		<div class="panel-body">
+			<div class="form-horizontal" th:object="${codeBean}">
+				<div class="form-group">
+					<label class="col-md-3 control-label">コード分類</label>
+					<div class="col-md-9 form-control-static" th:text="*{codeKind}"></div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-3 control-label">コード</label>
+					<div class="col-md-9 form-control-static" th:text="*{code}"></div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-3 control-label">コード名称</label>
+					<div class="col-md-9 form-control-static" th:text="*{codeName}"></div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-3 control-label">表示順</label>
+					<div class="col-md-9 form-control-static" th:text="*{displayRank}"></div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-3 control-label">有効区分</label>
+					<div class="col-md-9 form-control-static" th:text="*{effectFlag}"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common/head :: head_fragment(title = '社員新規登録', scripts = ~{::script}, links = ~{::link})"></head>
+<body>
+    <div class="container">
+        <div th:if="${validationError}" th:each="error : ${validationError}">
+            <label class="text-danger" th:text="${error}"></label>
+        </div>
+        <h1>社員新規登録</h1>
+        <form th:action="@{/emp/create}" th:object="${empAddRequest}" th:method="post">
+            <div class="form-group">
+                <label>社員ID：<span class="text-danger">※</span></label>
+                <input type="text" th:field="*{employeeID}" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>名前(姓)：</label>
+                <input type="text" th:field="*{nameKanji1}" class="form-control">
+                <label>名前(名)：</label>
+                <input type="text" th:field="*{nameKanji2}" class="form-control">
+            </div>
+             <div class="form-group">
+                <label>名前(姓)(フリかな)：<span class="text-danger">※</span></label>
+                <input type="text" th:field="*{nameKana1}" class="form-control">
+                <label>名前(名)(フリかな)：<span class="text-danger">※</span></label>
+                <input type="text" th:field="*{nameKana2}" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>名前(姓)(英語)：<span class="text-danger">※</span></label>
+                <input type="text" th:field="*{nameEng1}" class="form-control">
+                <label>名前(姓)(英語)：<span class="text-danger">※</span></label>
+                <input type="text" th:field="*{nameEng2}" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>生年月日：<span class="text-danger">※</span></label>
+                <input type="text" th:field="*{birthday}" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>性別：<span class="text-danger">※</span></label>
+                <input type="text" th:field="*{sex}" class="form-control">
+            </div>
+             <div class="form-group">
+                <label>社員区分：<span class="text-danger">※</span></label>
+                <input type="text" th:field="*{employeeFlag}" class="form-control">
+            </div>
+             <div class="form-group">
+                <label>入社日：<span class="text-danger">※</span></label>
+                <input type="text" th:field="*{enterDay}" class="form-control">
+            </div>
+             <div class="form-group">
+                <label> 郵便番号1：</label>
+                <input type="text" th:field="*{postNo1}" class="form-control">
+            </div>
+            <div class="form-group">
+                <label> 郵便番号2：</label>
+                <input type="text" th:field="*{postNo2}" class="form-control">
+            </div>
+             <div class="form-group">
+                <label> 住所１：</label>
+                <input type="text" th:field="*{address1}" class="form-control">
+            </div>
+             <div class="form-group">
+                <label> 住所2：</label>
+                <input type="text" th:field="*{address2}" class="form-control">
+            </div>
+            <div class="form-group">
+                <label> 連絡先１：</label>
+                <input type="text" th:field="*{telNo1}" class="form-control">
+            </div>
+            <div class="form-group">
+                <label> 連絡先2：</label>
+                <input type="text" th:field="*{telNo2}" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>  メールアドレス１ ：</label>
+                <input type="text" th:field="*{mail1}" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>  メールアドレス2 ：</label>
+                <input type="text" th:field="*{mail2}" class="form-control">
+            </div>
+            <br />
+            <div class="text-center">
+                <input type="submit" value="登録" class="btn btn-primary">
+                <a href="/emp/list" class="btn btn-secondary">キャンセル</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
