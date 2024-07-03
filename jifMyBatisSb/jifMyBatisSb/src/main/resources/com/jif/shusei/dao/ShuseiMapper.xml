@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jif.shusei.dao.ShuseiMapper">
+
+    <update id="update" parameterType="ShuseiEntity">
+        UPDATE combinedPayroll
+        SET
+            fixedWorkDays = #{fixedWorkDays},
+            absentDays = #{absentDays},
+            holidayWorkDays = #{holidayWorkDays},
+            lawHolidayWorkDays = #{lawHolidayWorkDays},
+            specialLeaveDays = #{specialLeaveDays},
+            fixedWorkHours = #{fixedWorkHours},
+            nonTaxableCommutingAllowance = #{nonTaxableCommutingAllowance},
+            housingAllowance = #{housingAllowance},
+            normalOvertimeAllowance = #{normalOvertimeAllowance},
+            holidayWorkAllowance = #{holidayWorkAllowance},
+            lawHolidayWorkAllowance = #{lawHolidayWorkAllowance},
+            absentDeduction = #{absentDeduction},
+            lateEarlyLeaveDeduction = #{lateEarlyLeaveDeduction},
+            dependents = #{dependents},
+            basicSalary = #{basicSalary},
+            healthInsurance = #{healthInsurance},
+            careInsurance = #{careInsurance},
+            pensionInsurance = #{pensionInsurance},
+            employmentInsurance = #{employmentInsurance},
+            incomeTax = #{incomeTax},
+            residentTax = #{residentTax},
+            other1 = #{other1},
+            other1Value = #{other1Value},
+            other2 = #{other2},
+            other2Value = #{other2Value},
+            other3 = #{other3},
+            other3Value = #{other3Value},
+            netPay = #{netPay},
+            bankTransferPay = #{bankTransferPay},
+            cashPay = #{cashPay},
+            inKindPay = #{inKindPay}
+        WHERE employeeID = #{employeeID}
+    </update>
+
+</mapper>

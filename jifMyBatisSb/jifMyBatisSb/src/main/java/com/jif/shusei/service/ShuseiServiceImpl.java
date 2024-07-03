@@ -1,48 +1,82 @@
-//improt追加
+package com.jif.shusei.service;
+
+import com.jif.shusei.entity.ShuseiEntity;
+import com.jif.shusei.form.ShuseiForm;
+import com.jif.shusei.dao.ShuseiDao;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class ShuseiServiceImpl implements ShuseiService {
+public class ShuseiServiceImpl {
 
     @Autowired
-    private ShuseiRepository shuseiRepository;
+    private ShuseiDao shuseiDao;
 
-    @Override
     @Transactional
-    public void saveShuseiDetails(ShuseiForm shuseiForm) {
-        ShuseiEntity shuseiEntity = new ShuseiEntity();
-        shuseiEntity.setFixedWorkDays(shuseiForm.getFixedWorkDays());
-        shuseiEntity.setAbsentDays(shuseiForm.getAbsentDays());
-        shuseiEntity.setHolidayWorkDays(shuseiForm.getHolidayWorkDays());
-        shuseiEntity.setLawHolidayWorkDays(shuseiForm.getLawHolidayWorkDays());
-        shuseiEntity.setSpecialLeaveDays(shuseiForm.getSpecialLeaveDays());
-        shuseiEntity.setFixedWorkHours(shuseiForm.getFixedWorkHours());
-        shuseiEntity.setNonTaxableCommutingAllowance(shuseiForm.getNonTaxableCommutingAllowance());
-        shuseiEntity.setHousingAllowance(shuseiForm.getHousingAllowance());
-        shuseiEntity.setNormalOvertimeAllowance(shuseiForm.getNormalOvertimeAllowance());
-        shuseiEntity.setHolidayWorkAllowance(shuseiForm.getHolidayWorkAllowance());
-        shuseiEntity.setLawHolidayWorkAllowance(shuseiForm.getLawHolidayWorkAllowance());
-        shuseiEntity.setAbsentDeduction(shuseiForm.getAbsentDeduction());
-        shuseiEntity.setLateEarlyLeaveDeduction(shuseiForm.getLateEarlyLeaveDeduction());
-        shuseiEntity.setDependents(shuseiForm.getDependents());
-        shuseiEntity.setBasicSalary(shuseiForm.getBasicSalary());
-        shuseiEntity.setHealthInsurance(shuseiForm.getHealthInsurance());
-        shuseiEntity.setCareInsurance(shuseiForm.getCareInsurance());
-        shuseiEntity.setPensionInsurance(shuseiForm.getPensionInsurance());
-        shuseiEntity.setEmploymentInsurance(shuseiForm.getEmploymentInsurance());
-        shuseiEntity.setIncomeTax(shuseiForm.getIncomeTax());
-        shuseiEntity.setResidentTax(shuseiForm.getResidentTax());
-        shuseiEntity.setOther1(shuseiForm.getOther1());
-        shuseiEntity.setOther1Value(shuseiForm.getOther1Value());
-        shuseiEntity.setOther2(shuseiForm.getOther2());
-        shuseiEntity.setOther2Value(shuseiForm.getOther2Value());
-        shuseiEntity.setOther3(shuseiForm.getOther3());
-        shuseiEntity.setOther3Value(shuseiForm.getOther3Value());
-        shuseiEntity.setNetPay(shuseiForm.getNetPay());
-        shuseiEntity.setBankTransferPay(shuseiForm.getBankTransferPay());
-        shuseiEntity.setCashPay(shuseiForm.getCashPay());
-        shuseiEntity.setInKindPay(shuseiForm.getInKindPay());
+    //修正関連
+    public void updateForm(ShuseiForm form) {
+        ShuseiEntity entity = new ShuseiEntity();
+        // フォームデータをエンティティにマッピング
+        entity.setFixedWorkDays(form.getFixedWorkDays());
+        entity.setAbsentDays(form.getAbsentDays());
+        entity.setHolidayWorkDays(form.getHolidayWorkDays());
+        entity.setLawHolidayWorkDays(form.getLawHolidayWorkDays());
+        entity.setSpecialLeaveDays(form.getSpecialLeaveDays());
+        entity.setFixedWorkHours(form.getFixedWorkHours());
+        entity.setNonTaxableCommutingAllowance(form.getNonTaxableCommutingAllowance());
+        entity.setHousingAllowance(form.getHousingAllowance());
+        entity.setNormalOvertimeAllowance(form.getNormalOvertimeAllowance());
+        entity.setHolidayWorkAllowance(form.getHolidayWorkAllowance());
+        entity.setLawHolidayWorkAllowance(form.getLawHolidayWorkAllowance());
+        entity.setAbsentDeduction(form.getAbsentDeduction());
+        entity.setLateEarlyLeaveDeduction(form.getLateEarlyLeaveDeduction());
+        entity.setDependents(form.getDependents());
+        entity.setBasicSalary(form.getBasicSalary());
+        entity.setHealthInsurance(form.getHealthInsurance());
+        entity.setCareInsurance(form.getCareInsurance());
+        entity.setPensionInsurance(form.getPensionInsurance());
+        entity.setEmploymentInsurance(form.getEmploymentInsurance());
+        entity.setIncomeTax(form.getIncomeTax());
+        entity.setResidentTax(form.getResidentTax());
+        entity.setOther1(form.getOther1());
+        entity.setOther1Value(form.getOther1Value());
+        entity.setOther2(form.getOther2());
+        entity.setOther2Value(form.getOther2Value());
+        entity.setOther3(form.getOther3());
+        entity.setOther3Value(form.getOther3Value());
+        entity.setNetPay(form.getNetPay());
+        entity.setBankTransferPay(form.getBankTransferPay());
+        entity.setCashPay(form.getCashPay());
+        entity.setInKindPay(form.getInKindPay());
 
-        // 저장
-        shuseiRepository.save(shuseiEntity);
+        // エンティティをアップデート
+        shuseiDao.update(entity);
+    }
+
+    //修正予定
+    public String getData(int value) {
+        if (value >= 1 && value <= 10) {
+            // 値が1～10の場合、1番目の項目の特定データを取得
+            return fetchFromTable1();
+        } else if (value >= 11 && value <= 20) {
+            // 値が11～20の場合、2番目の項目の特定データを取得
+            return fetchFromTable2();
+        } else {
+            // その他の範囲に対する処理や例外処理が必要
+            throw new IllegalArgumentException("Value must be between 1 and 20");
+        }
+    }
+
+    //修正予定
+    private String fetchFromTable1() {
+        // Table 1からデータを取得し返すロジック
+        return "Data from Table 1";
+    }
+
+    private String fetchFromTable2() {
+        // Table 2からデータを取得し返すロジック
+        return "Data from Table 2";
     }
 }
+

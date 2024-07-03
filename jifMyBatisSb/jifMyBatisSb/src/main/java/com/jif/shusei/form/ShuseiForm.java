@@ -1,3 +1,5 @@
+package com.jif.shusei.form;
+
 public class ShuseiForm {
 
         private String fixedWorkDays;
