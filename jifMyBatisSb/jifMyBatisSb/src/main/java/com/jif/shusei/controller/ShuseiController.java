@@ -32,4 +32,20 @@ public class ShuseiController {
         shuseiService.updateForm(form);
         return "redirect:/ichiran"; // 一覧画面にリダイレクト
     }
+
+    @PostMapping("/total")
+    public String saveForm(@ModelAttribute PayrollForm form, Model model) {
+        // 서버 측에서 합계 계산
+        int totalWorkDays = form.getFixedWorkDays() + form.getAbsentDays() + form.getHolidayWorkDays();
+        int totalPayment = form.getBasicSalary() + form.getNonTaxableCommutingAllowance() + form.getHousingAllowance();
+        int totalDeduction = form.getHealthInsurance() + form.getCareInsurance() + form.getPensionInsurance();
+
+        // 합계 값들을 모델에 추가
+        model.addAttribute("totalWorkDays", totalWorkDays);
+        model.addAttribute("totalPayment", totalPayment);
+        model.addAttribute("totalDeduction", totalDeduction);
+        model.addAttribute("form", form);
+
+        return "payroll";
+    }
 }

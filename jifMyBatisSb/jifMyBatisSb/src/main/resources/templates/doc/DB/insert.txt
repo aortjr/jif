@@ -1,0 +1,90 @@
+INSERT INTO public."M_Employee" ("employeeID", "nameKanji1", "nameKanji2", "nameKana1", "nameKana2", "nameEng1", "nameEng2", birthday, sex, "employeeFlag", "enterDay", "leaveDay", "postNo1", "postNo2", address1, address2, "telNo1", "telNo2", mail1, mail2, "authFlag", "effectFlag", "registPeople", "registDateTime", "modifyPeople", "modifyDateTime")
+VALUES ('R202404001', '金', '珉錫', 'キム', 'ミンソク', 'Kim', 'Minseok', '1999-03-02', 'M', 'Y', '2024-04-01', NULL, '123', '4567', 'Tokyo', 'Shinjuku', '123-4567-8901', '8901-2345-6789', 'kim@example.com', 'minseok@example.com', '01', 1, 'postgres', current_timestamp, 'postgres', current_timestamp);
+
+INSERT INTO develop.combinedpayroll (
+    employeeid,
+    month,
+    fixedworkdays,
+    workdays,
+    absentdays,
+    holidayworkdays,
+    lawholidayworkdays,
+    specialleavedays,
+    fixedworkhours,
+    basicsalary,
+    nontaxablecommutingallowance,
+    housingallowance,
+    normalovertimeallowance,
+    holidayworkallowance,
+    lawholidayworkallowance,
+    absentdeduction,
+    lateearlyleavededuction,
+    healthinsurance,
+    careinsurance,
+    pensioninsurance,
+    employmentinsurance,
+    incometax,
+    residenttax,
+    other1,
+    other1value,
+    other2,
+    other2value,
+    other3,
+    other3value,
+    incometaxtable,
+    netpay,
+    banktransferpay,
+    cashpay,
+    inkindpay,
+    effectflag,
+    registpeople,
+    registdatetime,
+    modifypeople,
+    modifydatetime
+) VALUES (
+    'R202404001',  -- employeeid
+    '2024-07-01',  -- month
+    20.5,  -- fixedworkdays
+    22.0,  -- workdays
+    2.0,   -- absentdays
+    1.5,   -- holidayworkdays
+    0.0,   -- lawholidayworkdays
+    1.0,   -- specialleavedays
+    160.0, -- fixedworkhours
+    250000.0, -- basicsalary
+    30000.0,  -- nontaxablecommutingallowance
+    50000.0,  -- housingallowance
+    15000.0,  -- normalovertimeallowance
+    20000.0,  -- holidayworkallowance
+    0.0,      -- lawholidayworkallowance
+    0.0,      -- absentdeduction
+    0.0,      -- lateearlyleavededuction
+    15000.0,  -- healthinsurance
+    10000.0,  -- careinsurance
+    20000.0,  -- pensioninsurance
+    10000.0,  -- employmentinsurance
+    35000.0,  -- incometax
+    15000.0,  -- residenttax
+    'Other1', -- other1
+    5000.0,   -- other1value
+    'Other2', -- other2
+    3000.0,   -- other2value
+    'Other3', -- other3
+    2000.0,   -- other3value
+    'Table1', -- incometaxtable
+    320000.0, -- netpay
+    310000.0, -- banktransferpay
+    5000.0,   -- cashpay
+    5000.0,   -- inkindpay
+    'Y',      -- effectflag
+    'postgres', -- registpeople
+    current_timestamp, -- registdatetime
+    'postgres', -- modifypeople
+    current_timestamp -- modifydatetime
+);
+
+INSERT INTO PremiumAmount (grade, monthlyAmount, nineHalfPrice, elevenHalfPrice, welfarePensionPremiumHalf, effectFlag, registPeople, registDateTime, modifyPeople, modifyDateTime)
+VALUES
+('A', 200000, 1500.00, 1800.00, 2500.00, '1', 'admin', current_timestamp, 'admin', current_timestamp),
+('B', 250000, 1800.00, 2000.00, 2800.00, '1', 'admin', current_timestamp, 'admin', current_timestamp),
+('C', 300000, 2000.00, 2200.00, 3000.00, '1', 'admin', current_timestamp, 'admin', current_timestamp);
