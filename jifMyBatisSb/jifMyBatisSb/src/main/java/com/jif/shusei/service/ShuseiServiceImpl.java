@@ -14,10 +14,9 @@ public class ShuseiServiceImpl {
     private ShuseiDao shuseiDao;
 
     @Transactional
-    //修正関連
     public void updateForm(ShuseiForm form) {
         ShuseiEntity entity = new ShuseiEntity();
-        // フォームデータをエンティティにマッピング
+        // 폼 데이터를 엔티티로 매핑
         entity.setFixedWorkDays(form.getFixedWorkDays());
         entity.setAbsentDays(form.getAbsentDays());
         entity.setHolidayWorkDays(form.getHolidayWorkDays());
@@ -50,33 +49,7 @@ public class ShuseiServiceImpl {
         entity.setCashPay(form.getCashPay());
         entity.setInKindPay(form.getInKindPay());
 
-        // エンティティをアップデート
+        // 엔티티를 업데이트
         shuseiDao.update(entity);
     }
-
-    //修正予定
-    public String getData(int value) {
-        if (value >= 1 && value <= 10) {
-            // 値が1～10の場合、1番目の項目の特定データを取得
-            return fetchFromTable1();
-        } else if (value >= 11 && value <= 20) {
-            // 値が11～20の場合、2番目の項目の特定データを取得
-            return fetchFromTable2();
-        } else {
-            // その他の範囲に対する処理や例外処理が必要
-            throw new IllegalArgumentException("Value must be between 1 and 20");
-        }
-    }
-
-    //修正予定
-    private String fetchFromTable1() {
-        // Table 1からデータを取得し返すロジック
-        return "Data from Table 1";
-    }
-
-    private String fetchFromTable2() {
-        // Table 2からデータを取得し返すロジック
-        return "Data from Table 2";
-    }
 }
-
